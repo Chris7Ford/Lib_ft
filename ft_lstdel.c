@@ -6,7 +6,7 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 09:31:37 by chford            #+#    #+#             */
-/*   Updated: 2019/02/19 20:36:01 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/20 10:12:06 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 	if (!alst)
 		return ;
 	link = *alst;
-	while (link->next)
+	while (link)
 	{
-		next = (link)->next;
+		next = link->next;
 		del(link->content, link->content_size);
 		free(link);
 		link = next;
