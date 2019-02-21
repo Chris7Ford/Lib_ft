@@ -5,30 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/20 17:58:02 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 17:58:08 by chford           ###   ########.fr       */
+/*   Created: 2019/02/13 15:55:39 by chford            #+#    #+#             */
+/*   Updated: 2019/02/18 11:44:16 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	char			*fstr;
-	unsigned int	i;
-	int				j;
+	int		i;
+	int		size;
+	char	*string;
 
-	if (s && f)
+	if (!s)
+		return (0);
+	size = ft_strlen(s);
+	string = (char *)malloc(sizeof(char) * size + 1);
+	if (!string)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
 	{
-		i = 0;
-		j = ft_strlen((char *)s);
-		fstr = (char *)malloc(j * sizeof(fstr));
-		while (s[i] != 0)
-		{
-			fstr[i] = f(i, s[i]);
-			i++;
-		}
-		return (fstr);
+		string[i] = f(i, s[i]);
+		i++;
 	}
-	return (NULL);
+	string[i] = '\0';
+	return (string);
 }

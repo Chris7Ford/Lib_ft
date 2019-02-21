@@ -5,48 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/20 18:03:36 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 18:03:44 by chford           ###   ########.fr       */
+/*   Created: 2019/02/13 20:44:56 by chford            #+#    #+#             */
+/*   Updated: 2019/02/19 16:22:31 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	itoa_isnegative(int *n, int *negative)
+static int	get_size(long n)
 {
-	if (*n < 0)
+	int		size;
+
+	size = 1;
+	while (n > 9)
 	{
-		*n *= -1;
-		*negative = 1;
+		size++;
+		n /= 10;
 	}
+	return (size);
 }
 
-char	*ft_itoa(int n)
+static long	get_multiplier(int size)
 {
-	int		tmpn;
-	int		len;
-	int		negative;
-	char	*str;
+	long	mult;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	tmpn = n;
-	len = 2;
-	negative = 0;
-	itoa_isnegative(&n, &negative);
-	while (tmpn /= 10)
-		len++;
-	len += negative;
-	if ((str = (char*)malloc(sizeof(char) * len)) == NULL)
-		return (NULL);
-	str[--len] = '\0';
-	while (len--)
+	mult = 1;
+	while (size > 1)
 	{
-		str[len] = n % 10 + '0';
-		n = n / 10;
+		mult *= 10;
+		size--;
 	}
-	if (negative)
-		str[0] = '-';
-	return (str);
+	return (mult);
+}
+
+static int	check_negative(long *n, char **string, int *i)
+{
+	int		is_negative;
+	int		size;
+
+	is_negative = 0;
+	if (*n < 0)
+	{
+		*n = *n * -1;
+		*i = *i + 1;
+		is_negative = 1;
+	}
+	size = get_size(*n);
+	if (is_negative)
+		size++;
+	*string = (char *)malloc(sizeof(char) * size + 1);
+	if (!*string)
+		return (0);
+	if (is_negative)
+	{
+		*string[0] = '-';
+		return (size - 1);
+	}
+	return (size);
+}
+
+char		*ft_itoa(int n)
+{
+	char	*string;
+	long	multiplier;
+	long	copy;
+	int		size;
+	int		i;
+
+	size = 1;
+	i = 0;
+	copy = (long)n;
+	size = check_negative(&copy, &string, &i);
+	if (!string)
+		return (0);
+	while (size > 0)
+	{
+		multiplier = get_multiplier(size);
+		string[i] = copy / multiplier + '0';
+		copy = copy - (multiplier * (string[i] - '0'));
+		size--;
+		i++;
+	}
+	string[i] = '\0';
+	return (string);
 }
