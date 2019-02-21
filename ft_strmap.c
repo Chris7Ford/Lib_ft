@@ -5,31 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 15:34:50 by chford            #+#    #+#             */
-/*   Updated: 2019/02/18 11:44:00 by chford           ###   ########.fr       */
+/*   Created: 2019/02/20 17:55:04 by chford            #+#    #+#             */
+/*   Updated: 2019/02/20 17:55:09 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strmap(const char *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f) (char))
 {
+	char	*fstr;
 	int		i;
-	int		size;
-	char	*string;
+	int		j;
 
-	if (!s)
-		return (0);
-	size = ft_strlen(s);
-	string = (char *)malloc(sizeof(char) * size + 1);
-	if (!string)
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
+	if (s && f)
 	{
-		string[i] = f(s[i]);
-		i++;
+		i = 0;
+		j = ft_strlen((char *)s);
+		fstr = (char *)malloc(j * sizeof(fstr));
+		while (s[i] != 0)
+		{
+			fstr[i] = f(s[i]);
+			i++;
+		}
+		return (fstr);
 	}
-	string[i] = '\0';
-	return (string);
+	return (NULL);
 }
