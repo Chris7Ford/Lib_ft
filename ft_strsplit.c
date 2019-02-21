@@ -5,71 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 18:47:04 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 17:30:07 by chford           ###   ########.fr       */
+/*   Created: 2019/02/20 16:25:24 by chford            #+#    #+#             */
+/*   Updated: 2019/02/20 16:26:09 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		count_words(char const *string, char c)
+static char		*ft_replace_chr(char const *s, int c1, int c2)
 {
-	int			i;
-	int			count;
+	size_t		i;
 
 	i = 0;
-	count = 0;
-	while (string[i] == c)
-		i++;
-	if (string[i] != '\0')
-		count++;
-	while (string[i] != '\0')
+	while (s[i])
 	{
-		if (string[i] == c && string[i + 1] != c && string[i + 1] != '\0')
-			count++;
-		i++;
+		if (s[i] == c1)
+			*((char *)s + i) = c2;
+		++i;
 	}
-	return (count);
-}
-
-static int		get_word_length(char const *s, char c)
-{
-	int		length;
-
-	length = 0;
-	while (*s != c && *s != '\0')
-	{
-		length++;
-		s++;
-	}
-	return (length);
+	return ((char *)s);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		**array;
-	int			word_length;
-	int			size;
-	int			i;
+	size_t		i;
+	size_t		j;
+	size_t		end;
+	char		tmp[ft_strlen(s) + 1];
+	char		**arr;
 
 	i = 0;
-	if (!s)
-		return (0);
-	size = count_words(s, c);
-	array = (char **)malloc(sizeof(char *) * size + 1);
-	if (!array)
-		return (0);
-	while (i < size)
+	j = 0;
+	end = ft_strlen(s);
+	ft_bzero(tmp, sizeof(tmp));
+	ft_strcpy(tmp, s);
+	ft_replace_chr(tmp, c, '\0');
+	arr = (char **)malloc(sizeof(*arr) * (end));
+	while (i < end && s[i] != '\0')
 	{
-		while (*s == c && *s != '\0')
-			s++;
-		word_length = get_word_length(s, c);
-		array[i] = ft_strsub(s, 0, word_length);
-		if (!(array[i]))
-			return (0);
-		s += word_length;
-		i++;
+		while (s[i] == c)
+			++i;
+		arr[j] = ft_strdup(tmp + i);
+		++j;
+		while (tmp[i] != '\0')
+			++i;
+		++i;
 	}
-	array[i] = 0;
-	return (array);
+	arr[j] = NULL;
+	return (arr);
 }
