@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/17 09:57:32 by chford            #+#    #+#             */
-/*   Updated: 2019/02/19 18:36:32 by chford           ###   ########.fr       */
+/*   Created: 2018/11/22 22:57:26 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/11/25 20:03:53 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*new;
-	t_list	*temp;
-	t_list	*beginning;
+	t_list		*curr;
+	t_list		*first;
 
-	if (!lst || !f)
-		return (0);
-	temp = f(lst);
-	new = ft_lstnew(temp->content, temp->content_size);
-	beginning = new;
-	lst = lst->next;
-	while (lst)
+	if (!lst)
+		return (NULL);
+	first = f(lst);
+	curr = first;
+	while (lst->next)
 	{
-		temp = f(lst);
-		new->next = ft_lstnew(temp->content, temp->content_size);
-		if (!new->next)
-			return (0);
 		lst = lst->next;
-		new = new->next;
+		curr->next = f(lst);
+		if (!(curr->next))
+		{
+			free(curr->next);
+			return (NULL);
+		}
+		curr = curr->next;
 	}
-	return (beginning);
+	return (first);
 }

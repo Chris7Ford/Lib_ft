@@ -6,16 +6,11 @@
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 20:51:10 by fwuensch          #+#    #+#             */
-/*   Updated: 2019/02/20 19:35:10 by chford           ###   ########.fr       */
+/*   Updated: 2018/11/25 23:48:48 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_isstrwhitespace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n');
-}
 
 char		*ft_strtrim(char const *s)
 {

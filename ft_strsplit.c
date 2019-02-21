@@ -6,28 +6,11 @@
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 20:59:01 by fwuensch          #+#    #+#             */
-/*   Updated: 2019/02/20 19:33:07 by chford           ###   ########.fr       */
+/*   Updated: 2018/11/25 23:48:31 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_countwords(char const *str, char c)
-{
-	size_t	count;
-	int		inside_a_word;
-
-	inside_a_word = 0;
-	count = 0;
-	while (*str)
-	{
-		if (!inside_a_word && *str != c)
-			count++;
-		inside_a_word = (*str == c) ? 0 : 1;
-		str++;
-	}
-	return (count);
-}
 
 char		**ft_strsplit(char const *s, char c)
 {

@@ -3,38 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 09:46:26 by chford            #+#    #+#             */
-/*   Updated: 2019/02/13 10:05:21 by chford           ###   ########.fr       */
+/*   Created: 2018/11/21 16:50:47 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/12/10 19:54:21 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int			ft_atoi(const char *str)
 {
-	int			i;
-	int			sign;
-	long		num;
+	int		i;
+	int		nbr;
+	int		sign;
 
 	i = 0;
-	num = 0;
+	nbr = 0;
 	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+	while (ft_iswhitespace(str[i]))
 		i++;
-	if (str[i] == '-')
+	if (str[i] == '+' || str[i] == '-')
 	{
-		sign = sign * -1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
+	while (str[i] && ft_isdigit(str[i]))
 	{
-		num = (num * 10) + (str[i] - '0');
+		nbr = nbr * 10 + str[i] - '0';
 		i++;
 	}
-	num = num * sign;
-	return ((int)num);
+	return (nbr * sign);
 }

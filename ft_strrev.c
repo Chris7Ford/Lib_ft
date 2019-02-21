@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 21:05:14 by fwuensch          #+#    #+#             */
-/*   Updated: 2018/11/26 18:11:18 by fwuensch         ###   ########.fr       */
+/*   Created: 2018/11/25 19:46:15 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/11/25 21:25:51 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putendl(char const *s)
+void	ft_strrev(char *str)
 {
-	if (!s)
-		return ;
-	ft_putendl_fd(s, 1);
+	char	c;
+	char	*end;
+
+	end = str + ft_strlen(str) - 1;
+	while (str < end)
+	{
+		c = *str;
+		*str++ = *end;
+		*end-- = c;
+	}
 }

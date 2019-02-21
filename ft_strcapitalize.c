@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 21:05:14 by fwuensch          #+#    #+#             */
-/*   Updated: 2018/11/26 18:11:18 by fwuensch         ###   ########.fr       */
+/*   Created: 2018/11/25 13:02:10 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/11/25 14:48:50 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putendl(char const *s)
+char			*ft_strcapitalize(char *s)
 {
-	if (!s)
-		return ;
-	ft_putendl_fd(s, 1);
+	int		i;
+
+	i = 0;
+	s[i] = ft_toupper(s[i]);
+	while (s[++i])
+	{
+		s[i] = ft_tolower(s[i]);
+		if (!ft_isalnum(s[i - 1]))
+			s[i] = ft_toupper(s[i]);
+	}
+	return (s);
 }

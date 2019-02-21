@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_lstreverse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 21:05:14 by fwuensch          #+#    #+#             */
-/*   Updated: 2018/11/26 18:11:18 by fwuensch         ###   ########.fr       */
+/*   Created: 2018/11/25 12:21:38 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/11/25 16:46:36 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putendl(char const *s)
+t_list				*ft_lstreverse(t_list *list)
 {
-	if (!s)
-		return ;
-	ft_putendl_fd(s, 1);
+	t_list	*curr;
+	t_list	*prev;
+	t_list	*next;
+
+	prev = NULL;
+	curr = list;
+	while (curr)
+	{
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	list = prev;
+	return (list);
 }

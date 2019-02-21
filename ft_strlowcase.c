@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 21:05:14 by fwuensch          #+#    #+#             */
-/*   Updated: 2018/11/26 18:11:18 by fwuensch         ###   ########.fr       */
+/*   Created: 2018/11/25 14:28:15 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/11/25 14:39:14 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putendl(char const *s)
+char				*ft_strlowcase(char *s)
 {
-	if (!s)
-		return ;
-	ft_putendl_fd(s, 1);
+	int		i;
+
+	i = -1;
+	while (s[++i])
+		s[i] = ft_tolower(s[i]);
+	return (s);
 }

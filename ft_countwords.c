@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 21:05:14 by fwuensch          #+#    #+#             */
-/*   Updated: 2018/11/26 18:11:18 by fwuensch         ###   ########.fr       */
+/*   Created: 2018/11/21 22:49:45 by fwuensch          #+#    #+#             */
+/*   Updated: 2018/11/22 18:08:40 by fwuensch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putendl(char const *s)
+int		ft_countwords(char const *str, char c)
 {
-	if (!s)
-		return ;
-	ft_putendl_fd(s, 1);
+	size_t	count;
+	int		inside_a_word;
+
+	inside_a_word = 0;
+	count = 0;
+	while (*str)
+	{
+		if (!inside_a_word && *str != c)
+			count++;
+		inside_a_word = (*str == c) ? 0 : 1;
+		str++;
+	}
+	return (count);
 }
