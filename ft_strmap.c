@@ -6,9 +6,11 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:55:04 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 17:55:09 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:56:30 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strmap(char const *s, char (*f) (char))
 {
