@@ -5,49 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 17:06:11 by chford            #+#    #+#             */
-/*   Updated: 2019/02/19 16:17:33 by chford           ###   ########.fr       */
+/*   Created: 2019/02/20 16:31:20 by chford            #+#    #+#             */
+/*   Updated: 2019/02/20 16:31:48 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_length(char const *s, int i)
-{
-	int		length;
-
-	length = ft_strlen(s) - 1;
-	while (s[length] == ' ' || s[length] == '\n' || s[length] == '\t')
-		length--;
-	length = length - i + 1;
-	if (length < 0)
-		length = 0;
-	return (length);
-}
-
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	int		i;
-	int		j;
-	int		length;
-	char	*string;
+	int		len;
+	char	*str;
 
-	if (!s)
-		return (0);
-	i = 0;
-	j = 0;
-	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-		i++;
-	length = get_length(s, i);
-	string = ft_strnew(length);
-	if (!string)
-		return (0);
-	while (j < (length))
-	{
-		string[j] = s[i];
-		i++;
-		j++;
-	}
-	string[j] = '\0';
-	return (string);
+	if (s == NULL)
+		return (NULL);
+	len = ft_strlen(s);
+	while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
+		len--;
+	i = -1;
+	while (s[++i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		len--;
+	if (len <= 0)
+		len = 0;
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	s += i;
+	i = -1;
+	while (++i < len)
+		str[i] = *s++;
+	str[i] = '\0';
+	return (str);
 }
