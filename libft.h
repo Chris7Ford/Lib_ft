@@ -6,7 +6,7 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 18:04:30 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 09:36:46 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/21 09:02:49 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define LIBFT_H
 
 # include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
 
 typedef struct s_list	t_list;
 

@@ -6,11 +6,12 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 09:31:37 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 10:12:06 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/21 09:01:26 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {

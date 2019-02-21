@@ -6,11 +6,12 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 20:44:56 by chford            #+#    #+#             */
-/*   Updated: 2019/02/19 16:22:31 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/21 08:58:03 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static int	get_size(long n)
 {

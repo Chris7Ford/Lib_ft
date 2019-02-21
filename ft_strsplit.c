@@ -6,11 +6,12 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:47:04 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 17:30:07 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/21 08:58:36 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static int		count_words(char const *string, char c)
 {
