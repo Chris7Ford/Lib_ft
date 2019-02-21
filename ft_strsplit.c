@@ -6,7 +6,7 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:47:04 by chford            #+#    #+#             */
-/*   Updated: 2019/02/19 19:28:24 by chford           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:30:07 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,81 +32,44 @@ static int		count_words(char const *string, char c)
 	return (count);
 }
 
-static void		make_space_for_words(char **array, char const *string, char c)
+static int		get_word_length(char const *s, char c)
 {
-	int			i;
-	int			j;
-	int			l;
+	int		length;
 
-	i = 0;
-	j = 0;
-	l = 0;
-	while (string[i] == c)
-		i++;
-	while (string[i] != '\0')
+	length = 0;
+	while (*s != c && *s != '\0')
 	{
-		if (string[i] != c)
-			j++;
-		if ((string[i] == c && string[i + 1] != c && string[i] != '\0') ||
-				string[i + 1] == '\0')
-		{
-			array[l] = (char *)malloc(sizeof(char) * j + 1);
-			if (!array[l])
-				return ;
-			l++;
-			j = 0;
-		}
-		i++;
+		length++;
+		s++;
 	}
-	return ;
-}
-
-static void		fill_it_up(char **array, char const *string, char c)
-{
-	int			i;
-	int			j;
-	int			l;
-
-	i = 0;
-	j = 0;
-	l = 0;
-	while (string[i] == c)
-		i++;
-	while (string[i] != '\0')
-	{
-		if (string[i] != c)
-		{
-			array[l][j++] = string[i];
-		}
-		if ((string[i] == c && string[i + 1] != c && string[i] != '\0') ||
-				string[i + 1] == '\0')
-		{
-			array[l][j] = '\0';
-			l++;
-			j = 0;
-		}
-		i++;
-	}
-	array[l] = 0;
+	return (length);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
 	char		**array;
+	int			word_length;
 	int			size;
+	int			i;
 
+	i = 0;
 	if (!s)
 		return (0);
 	size = count_words(s, c);
 	array = (char **)malloc(sizeof(char *) * size + 1);
 	if (!array)
 		return (0);
-	if (size == 0)
+	while (i < size)
 	{
-		array[0] = 0;
-		return (array);
+		while (*s == c && *s != '\0')
+			s++;
+		word_length = get_word_length(s, c);
+		array[i] = ft_strsub(s, 0, word_length);
+		if (!(array[i]))
+			return (0);
+		s += word_length;
+		i++;
 	}
-	make_space_for_words(array, s, c);
-	fill_it_up(array, s, c);
+	array[i] = 0;
 	return (array);
 }
