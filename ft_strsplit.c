@@ -3,54 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fwuensch <fwuensch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/20 16:25:24 by chford            #+#    #+#             */
-/*   Updated: 2019/02/20 16:26:09 by chford           ###   ########.fr       */
+/*   Created: 2018/11/21 20:59:01 by fwuensch          #+#    #+#             */
+/*   Updated: 2019/02/20 19:33:07 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_replace_chr(char const *s, int c1, int c2)
+static int	ft_countwords(char const *str, char c)
 {
-	size_t		i;
+	size_t	count;
+	int		inside_a_word;
 
-	i = 0;
-	while (s[i])
+	inside_a_word = 0;
+	count = 0;
+	while (*str)
 	{
-		if (s[i] == c1)
-			*((char *)s + i) = c2;
-		++i;
+		if (!inside_a_word && *str != c)
+			count++;
+		inside_a_word = (*str == c) ? 0 : 1;
+		str++;
 	}
-	return ((char *)s);
+	return (count);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	size_t		i;
-	size_t		j;
-	size_t		end;
-	char		tmp[ft_strlen(s) + 1];
-	char		**arr;
+	char	**a;
+	size_t	inside_a_word;
+	size_t	word_index;
+	size_t	i;
+	size_t	start;
 
-	i = 0;
-	j = 0;
-	end = ft_strlen(s);
-	ft_bzero(tmp, sizeof(tmp));
-	ft_strcpy(tmp, s);
-	ft_replace_chr(tmp, c, '\0');
-	arr = (char **)malloc(sizeof(*arr) * (end));
-	while (i < end && s[i] != '\0')
+	if (!s)
+		return (NULL);
+	if (!(a = (char **)ft_memalloc((ft_countwords(s, c) + 1) * sizeof(char *))))
+		return (NULL);
+	word_index = 0;
+	inside_a_word = 0;
+	i = -1;
+	start = 0;
+	while (s[++i])
 	{
-		while (s[i] == c)
-			++i;
-		arr[j] = ft_strdup(tmp + i);
-		++j;
-		while (tmp[i] != '\0')
-			++i;
-		++i;
+		if (inside_a_word && s[i] == c)
+			a[word_index++] = ft_strsub(s, start, i - start);
+		if (!inside_a_word && s[i] != c)
+			start = i;
+		inside_a_word = (s[i] == c) ? 0 : 1;
 	}
-	arr[j] = NULL;
-	return (arr);
+	if (inside_a_word)
+		a[word_index] = ft_strsub(s, start, i - start);
+	return (a);
 }
