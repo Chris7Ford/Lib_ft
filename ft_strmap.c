@@ -6,7 +6,7 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 15:34:50 by chford            #+#    #+#             */
-/*   Updated: 2019/02/21 08:56:32 by chford           ###   ########.fr       */
+/*   Updated: 2019/03/04 10:07:06 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strmap(const char *s, char (*f)(char))
 	if (!s)
 		return (0);
 	size = ft_strlen(s);
-	string = (char *)malloc(sizeof(char) * size + 1);
+	string = (char *)malloc(sizeof(char) * (size + 1));
 	if (!string)
 		return (0);
 	i = 0;

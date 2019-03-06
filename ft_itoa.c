@@ -6,7 +6,7 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 20:44:56 by chford            #+#    #+#             */
-/*   Updated: 2019/02/21 08:58:03 by chford           ###   ########.fr       */
+/*   Updated: 2019/03/04 10:08:48 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	check_negative(long *n, char **string, int *i)
 	size = get_size(*n);
 	if (is_negative)
 		size++;
-	*string = (char *)malloc(sizeof(char) * size + 1);
+	*string = (char *)malloc(sizeof(char) * (size + 1));
 	if (!*string)
 		return (0);
 	if (is_negative)

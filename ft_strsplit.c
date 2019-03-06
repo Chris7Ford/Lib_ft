@@ -6,7 +6,7 @@
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:47:04 by chford            #+#    #+#             */
-/*   Updated: 2019/02/21 08:58:36 by chford           ###   ########.fr       */
+/*   Updated: 2019/03/04 10:12:04 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			**ft_strsplit(char const *s, char c)
 	if (!s)
 		return (0);
 	size = count_words(s, c);
-	array = (char **)malloc(sizeof(char *) * size + 1);
+	array = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!array)
 		return (0);
 	while (i < size)
