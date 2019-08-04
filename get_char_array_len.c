@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   get_char_array_len.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 19:54:14 by chford            #+#    #+#             */
-/*   Updated: 2019/05/05 19:47:11 by chford           ###   ########.fr       */
+/*   Created: 2019/06/04 16:12:50 by chford            #+#    #+#             */
+/*   Updated: 2019/06/04 16:14:39 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+int		get_char_array_len(char **tab)
 {
-	size_t		length;
-	size_t		i;
+	int		i;
 
 	i = 0;
-	length = ft_strlen((char*)src);
-	while (i < len)
-	{
-		if (i > length)
-			dst[i] = '\0';
-		else
-			dst[i] = src[i];
+	while (tab[i])
 		i++;
-	}
-	return (dst);
+	return (i);
 }

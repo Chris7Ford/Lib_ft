@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 19:54:14 by chford            #+#    #+#             */
-/*   Updated: 2019/05/05 19:47:11 by chford           ###   ########.fr       */
+/*   Created: 2019/02/13 16:53:43 by chford            #+#    #+#             */
+/*   Updated: 2019/06/10 16:27:36 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+char	*ft_strjoin_char(char **s1, char c)
 {
-	size_t		length;
-	size_t		i;
+	int		i;
+	char	*string;
 
 	i = 0;
-	length = ft_strlen((char*)src);
-	while (i < len)
+	string = (char *)malloc(sizeof(char) * (ft_strlen(*s1) + 2));
+	if (!string)
+		return (0);
+	while ((*s1)[i] != '\0')
 	{
-		if (i > length)
-			dst[i] = '\0';
-		else
-			dst[i] = src[i];
+		string[i] = (*s1)[i];
 		i++;
 	}
-	return (dst);
+	free(*s1);
+	string[i] = c;
+	string[i + 1] = '\0';
+	return (string);
 }

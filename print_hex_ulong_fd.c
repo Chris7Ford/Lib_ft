@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   print_hex_ulong_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chford <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 19:54:14 by chford            #+#    #+#             */
-/*   Updated: 2019/05/05 19:47:11 by chford           ###   ########.fr       */
+/*   Created: 2019/05/09 10:15:04 by chford            #+#    #+#             */
+/*   Updated: 2019/05/09 10:55:06 by chford           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+void	print_hex_ulong_fd(unsigned long n, int fd)
 {
-	size_t		length;
-	size_t		i;
+	char	array[16];
 
-	i = 0;
-	length = ft_strlen((char*)src);
-	while (i < len)
+	ft_strcpy(array, "0123456789abcdef");
+	if (n < 16)
 	{
-		if (i > length)
-			dst[i] = '\0';
-		else
-			dst[i] = src[i];
-		i++;
+		write(fd, &(array[n]), 1);
+		return ;
 	}
-	return (dst);
+	print_hex_ulong_fd(n / 16, fd);
+	write(fd, &(array[n % 16]), 1);
 }
